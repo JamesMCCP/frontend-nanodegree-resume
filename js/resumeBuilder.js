@@ -83,15 +83,22 @@ var bio = {
   "name" : "James McCarthy-Price",
   "role" : "Environmental Windsurfer",
   "welcomeMessage" : "Welcome to my page :)",
-  "bioPic" : "images/portrait.jpg",
-  "skills" : ["Windsurfing","Programming","Photography","Renewable Wave Energy"],
+  "portrait" : "images/portrait.jpg",
+  "skills" : ["Renewable Wave Energy","Windsurfing","Programming","Photography"],
   "contacts" : {
     "email" : "jmccarthy.price@gmail.com",
     "mobile" : "0420 786 589",
   }
 };
 
+// Add name and role:
 $("#header").append(HTMLheaderName.replace("%data%", bio.name));
+$("#header").append(HTMLheaderRole.replace("%data%", bio.role));
+
+// Add Profile Pic:
+$("#header").append(HTMLbioPic.replace("%data%", bio.portrait));
+
+// Add Contact Details:
 
 if (bio.skills.length > 0) {
 	$("#header").append(HTMLskillsStart);
@@ -108,3 +115,19 @@ if (bio.skills.length > 0) {
 	formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
 	$("#skills").append(formattedSkill);
 };
+
+for (job in work.jobs) {
+	$("#workExperience").append(HTMLworkStart);
+
+	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+
+	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+
+	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+
+	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+	var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedDates + formattedDescription;
+
+	$(".work-entry:last").append(formattedEmployerTitle);
+}
