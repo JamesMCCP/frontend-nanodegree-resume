@@ -6,21 +6,21 @@ var education = {
 	"schools" : [
 	{
 		"name": "University of Western	Australia",
-		"city" : "Perth, Western Australia",
+		"location" : "Perth, Western Australia",
 		"degree" : "Masters",
 		"major" : "Environmental Engineering",
 		"dates" : "2014-2015"
 	},
 	{
 		"name" : "Stanford University",
-		"city" : "Palo Alto, California",
+		"location" : "Palo Alto, California",
 		"degree" : "Certificate",
 		"major" : "Technology and Innovation",
 		"dates" : 2015
 	},
 	{
 		"name" : "University of Bologna",
-		"city" : "Bologna, Italy",
+		"location" : "Bologna, Italy",
 		"degree" : "Masters",
 		"major" : "Environmental Engineering",
 		"dates" : 2014
@@ -29,6 +29,7 @@ var education = {
 	"onlineCourses": [
 	{
 		"title": "Front End Web Developer",
+		"location" : "San Francisco, California",
 		"school" : "Udacity",
 		"url" : "www.udacity.com",
 		"dates" : "2014-2015"
@@ -66,12 +67,14 @@ var projects = {
 	"projects" : [
 	{
 		"title" : "Entrepreneering in Western Australia",
+		"location" : "Perth, Western Australia",
 		"dates" : "2014",
 		"description" : "Held an evening, attracting over 150 young and student engineers to discuss the intersection of Entrepreneurship and Engineering.",
 		"images" : ["images/entrep.png"]
 	},
 	{		
 		"title" : "IndGenius",
+		"location" : "Perth, Western Australia",
 		"dates" : "2012 - 2013",
 		"description" : "Perth, Western Australia",
 		"images" : ["images/indgenius.png"]
@@ -82,6 +85,7 @@ var projects = {
 var bio = {
   "name" : "James McCarthy-Price",
   "role" : "Environmental Windsurfer",
+  "location" : "Perth, Western Australia",
   "welcomeMessage" : "Welcome to my page :)",
   "portrait" : "images/portrait.jpg",
   "skills" : ["Renewable Wave Energy","Windsurfing","Programming","Photography"],
@@ -136,6 +140,7 @@ function displayWork() {
 
 displayWork();
 
+// Log clicks:
 $(document).click(function(loc) {
 	var x = loc.pageX;
 	var y = loc.pageY;
@@ -193,3 +198,6 @@ projects.display = function() {
 }
 
 projects.display();
+
+// Add map:
+$("#mapDiv").append(googleMap);
