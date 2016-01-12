@@ -105,7 +105,7 @@ var bio = {
   "location" : "Perth, Western Australia",
   "welcomeMessage" : "Hello and welcome to my Udacity created profile! :)",
   "biopic" : "images/portrait.jpg",
-  "skills" : ["Renewable Wave Energy","Windsurfing","Programming","Photography"],
+  "skills" : ["Renewable Wave Energy","Windsurfing","Programming","Photography","Guitar"],
   "contacts" : {
     "email" : "jmccarthy.price@gmail.com",
     "mobile" : "0420 786 589",
@@ -163,36 +163,39 @@ function displayWork() {
 	if (bio.skills.length > 0) {
 		$("#header").append(HTMLskillsStart);
 		
-		var formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
-		$("#skills").append(formattedSkill);
+		//Create formatted skills variables:
+		var formattedSkill1 = HTMLskills.replace("%data%",bio.skills[0]);
+		var formattedSkill2 = HTMLskills.replace("%data%",bio.skills[1]);
+		var formattedSkill3 = HTMLskills.replace("%data%",bio.skills[2]);
+		var formattedSkill4 = HTMLskills.replace("%data%",bio.skills[3]);
+		var formattedSkill5 = HTMLskills.replace("%data%",bio.skills[4]);
 
-		formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-		$("#skills").append(formattedSkill);
+		// Combine skills to single var:
+		var allSkills = formattedSkill1 + formattedSkill2 + formattedSkill3 + formattedSkill4 + formattedSkill5;
 
-		formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-		$("#skills").append(formattedSkill);
-
-		formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
-		$("#skills").append(formattedSkill);
+		// Append Skill to #skills:
+		$("#skills").append(allSkills);
 	};
 
+	// Employer loop:
 	for (job in work.jobs) {
 		$("#workExperience").append(HTMLworkStart);
 
+		// Create employer variables:
 		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-
 		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-
 		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-
 		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
 
+		// Combine employer variables:
 		var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedDates + formattedDescription;
 
+		// Append employer variables:
 		$(".work-entry:last").append(formattedEmployerTitle);
 	}
 };
 
+// Call work function:
 displayWork();
 
 // Log clicks:
@@ -217,6 +220,7 @@ function locationizer(work_obj) {
 // Appended internationalise button:
 $("#main").append(internationalizeButton);
 
+// International button capitaliser:
 function inName (name) {
 	var nameArray = bio.name.split(" ");
 
@@ -226,6 +230,7 @@ function inName (name) {
 
 };
 
+// Projects function:
 projects.display = function() {
 	for (project in projects.projects) {
 		$("#projects").append(HTMLprojectStart);
@@ -252,6 +257,7 @@ projects.display = function() {
 	}
 }
 
+// Call functions button:
 projects.display();
 
 // Add map:
