@@ -9,21 +9,24 @@ var education = {
 		"location" : "Perth, Western Australia",
 		"degree" : "Masters",
 		"major" : "Environmental Engineering",
-		"dates" : "2014-2015"
+		"dates" : "2014-2015",
+		"url" : "http://handbooks.uwa.edu.au/courses/coursedetails?code=62550"
 	},
 	{
 		"name" : "Stanford University",
 		"location" : "Palo Alto, California",
 		"degree" : "Certificate",
-		"major" : "Technology and Innovation",
-		"dates" : 2015
+		"major" : "Technology and Innovation & Water Management",
+		"dates" : 2015,
+		"url" : "http://summer.stanford.edu/academics/intensive-studies/global-perspectives/"
 	},
 	{
 		"name" : "University of Bologna",
 		"location" : "Bologna, Italy",
 		"degree" : "Masters",
 		"major" : "Environmental Engineering",
-		"dates" : 2014
+		"dates" : 2014,
+		"url" : "http://corsi.unibo.it/ingegneriambienterritorioLM/Pagine/default.aspx"
 	}
 	],
 	"onlineCourses": [
@@ -100,21 +103,59 @@ var bio = {
   "name" : "James McCarthy-Price",
   "role" : "Environmental Windsurfer",
   "location" : "Perth, Western Australia",
-  "welcomeMessage" : "Welcome to my page :)",
-  "portrait" : "images/portrait.jpg",
+  "welcomeMessage" : "Hello and welcome to my Udacity created profile! :)",
+  "biopic" : "images/portrait.jpg",
   "skills" : ["Renewable Wave Energy","Windsurfing","Programming","Photography"],
   "contacts" : {
     "email" : "jmccarthy.price@gmail.com",
     "mobile" : "0420 786 589",
-  }
+    "github" : "https://github.com/JamesMCCP",
+    "twitter" : "https://twitter.com/JamesMCCP",
+    "location" : "Perth, Australia"
+  },
 };
 
 // Add name and role:
-$("#header").append(HTMLheaderName.replace("%data%", bio.name));
-$("#header").append(HTMLheaderRole.replace("%data%", bio.role));
+var formattedName = HTMLheaderName.replace("%data%", bio.name);
+var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+$("#header").prepend(formattedName, formattedRole);
+
+// Add bio contact details:
+function displayContact() {
+
+	// Add email address:
+	var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
+
+	// Add Mobile Phone:
+	var formattedMobile = HTMLmobile.replace("%data%",bio.contacts.mobile);
+
+	// Add GitHub:
+	var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
+
+	// Add Twitter:
+	var formattedTwitter = HTMLtwitter.replace("%data%",bio.contacts.twitter);
+
+	// Add location:
+	var formattedLocation = HTMLlocation.replace("%data%",bio.contacts.location);
+
+	// Create combined contact variable:
+	var allContactDetail = formattedEmail + formattedMobile + formattedGithub + formattedTwitter + formattedLocation;
+
+	// Append info to header contacts:
+	$("#topContacts").append(allContactDetail);
+
+	// Append info to footer contacts:
+	$("#footerContacts").append(allContactDetail);
+
+};
+
+displayContact();
+
+// Add bio message:
+$("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
 
 // Add Profile Pic:
-$("#header").append(HTMLbioPic.replace("%data%", bio.portrait));
+$("#header").append(HTMLbioPic.replace("%data%", bio.biopic));
 
 // Add Contact Details:
 
