@@ -68,14 +68,14 @@ var projects = {
 		"title" : "Entrepreneering in Western Australia",
 		"dates" : "2014",
 		"description" : "Held an evening, attracting over 150 young and student engineers to discuss the intersection of Entrepreneurship and Engineering.",
-		"images" : "https://pbs.twimg.com/media/CE5OntOUkAAeKR3.jpg"
+		"images" : ["images/entrep.png"]
 	},
 	{		
 		"title" : "IndGenius",
 		"dates" : "2012 - 2013",
 		"description" : "Perth, Western Australia",
-		"images" : "images/indgenius.jpeg",
-	},
+		"images" : ["images/indgenius.png"]
+	}
 	]
 };
 
@@ -100,34 +100,96 @@ $("#header").append(HTMLbioPic.replace("%data%", bio.portrait));
 
 // Add Contact Details:
 
-if (bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-	
-	var formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
-	$("#skills").append(formattedSkill);
+function displayWork() {
+	if (bio.skills.length > 0) {
+		$("#header").append(HTMLskillsStart);
+		
+		var formattedSkill = HTMLskills.replace("%data%",bio.skills[0]);
+		$("#skills").append(formattedSkill);
 
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
-	$("#skills").append(formattedSkill);
+		formattedSkill = HTMLskills.replace("%data%",bio.skills[1]);
+		$("#skills").append(formattedSkill);
 
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
-	$("#skills").append(formattedSkill);
+		formattedSkill = HTMLskills.replace("%data%",bio.skills[2]);
+		$("#skills").append(formattedSkill);
 
-	formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
-	$("#skills").append(formattedSkill);
+		formattedSkill = HTMLskills.replace("%data%",bio.skills[3]);
+		$("#skills").append(formattedSkill);
+	};
+
+	for (job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+
+		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+
+		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+		var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedDates + formattedDescription;
+
+		$(".work-entry:last").append(formattedEmployerTitle);
+	}
 };
 
-for (job in work.jobs) {
-	$("#workExperience").append(HTMLworkStart);
+displayWork();
 
-	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
 
-	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+	logClicks(x,y);
+})
 
-	var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+function locationizer(work_obj) {
+	var locationArray = [];
 
-	var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+	for (job in work_obj.jobs) {
+		var newLocation = work_obj.jobs[job].location;
+		locationArray.push(newLocation);
+	}
 
-	var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedDates + formattedDescription;
-
-	$(".work-entry:last").append(formattedEmployerTitle);
+	return locationArray;
 }
+
+// Appended internationalise button:
+$("#main").append(internationalizeButton);
+
+function inName (name) {
+	var nameArray = bio.name.split(" ");
+
+	newName = nameArray[0] + " " + nameArray[1].toUpperCase();
+
+	return newName;
+
+};
+
+projects.display = function() {
+	for (project in projects.projects) {
+		$("#projects").append(HTMLprojectStart);
+
+		// Add title:
+		var formattedProjTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		$(".project-entry:last").append(formattedProjTitle);
+
+		// Add dates:
+		var formattedProjDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+		$(".project-entry:last").append(formattedProjDates);
+
+		// Add Description:
+		var formattedProjDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+		$(".project-entry:last").append(formattedProjDescription);
+
+		// Add image if possible:
+		if (projects.projects[project].images.length > 0) {
+			for (image in projects.projects[project].images) {
+				var formattedProjImages = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedProjImages);
+			}
+		}
+	}
+}
+
+projects.display();
