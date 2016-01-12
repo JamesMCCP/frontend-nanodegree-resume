@@ -172,7 +172,7 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: 'I have lived in ' + name
     });
 
     // hmmmm, I wonder what this is about...
