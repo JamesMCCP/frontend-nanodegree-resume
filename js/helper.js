@@ -210,16 +210,22 @@ function initializeMap() {
     var service = new google.maps.places.PlacesService(map);
 
     // Iterates through the array of locations, creates a search object for each location
-      locations.forEach(function(place){
-      // the search request object
-      var request = {
-        query: place
-      };
+    
+    for (var place in locations) {
+    // New sections to check if locations[place] exists
+    // This keeps google maps from breaking if a location field is empty.
+    if (!locations[place]) 
+    continue;
+
+    // the search request object
+    var request = {
+    query: locations[place]
+    };
 
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
-    });
+    };
   }
 
   // Sets the boundaries of the map based on pin locations

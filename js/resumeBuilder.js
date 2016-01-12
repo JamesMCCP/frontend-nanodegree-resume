@@ -76,8 +76,22 @@ var projects = {
 		"title" : "IndGenius",
 		"location" : "Perth, Western Australia",
 		"dates" : "2012 - 2013",
-		"description" : "Perth, Western Australia",
+		"description" : "Founded a tailored tutoring service for Indigenous tertiary University students.",
 		"images" : ["images/indgenius.png"]
+	},
+	{		
+	"title" : "Wasima Conservation Project",
+	"location" : "Mpanda, Tanzania",
+	"dates" : "2015",
+	"description" : "Filmed a documentary about Lion Killers near Kibione in remote south-western Tanzania for the Wasima Conservation Project.",
+	"images" : ["images/wasima.png"]
+	},	
+	{		
+	"title" : "Professional Windsurfing Association",
+	"location" : "Warsaw, Poland",
+	"dates" : "2015",
+	"description" : "Volounteered for the Poland Indoor Event. Coordinated all athletes on live TV in a stadium of 35,000 people.",
+	"images" : ["images/poland.png"]
 	}
 	]
 };
