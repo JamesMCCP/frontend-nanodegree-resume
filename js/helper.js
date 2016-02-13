@@ -1,78 +1,123 @@
-/*
-
-This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
-Don't worry, you'll learn what's going on in this file throughout the course. You won't need to make any changes to it until you start experimenting with inserting a Google Map in Problem Set 3.
-
-Cameron Pittman
-*/
-
-
-/*
-These are HTML strings. As part of the course, you'll be using JavaScript functions
-replace the %data% placeholder text you see in them.
-*/
-var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr>';
-
-var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
-
+var HTMLimgDiv = '<div class="img-div"></div>';
 var HTMLbioPic = '<img src="%data%" class="biopic">';
-var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
 
-var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance</h3><ul id="skills" class="flex-box"></ul>';
+// This Div Contains Name and Role
+var HTMLnameDiv = '<div class="name-div"></div>';
+var HTMLheaderName = '<h1 id="name">%data%</h1>';
+var HTMLheaderRole = '<h2 class="role">%data%</h2>';
+var HTMLlocation = '<div class="location-info"><i class="ion-ios-location-outline location-icon"></i><span class="location-text">%data%</span></div>';
 
+//This Div contains Contact Info
+var HTMLcontactDiv = '<div class="contact-div"></div>';
+var HTMLcontactGeneric = '<div class="contact-item"><div class="contact-attr">%contact%</div><div class="contact-value"><span>%data%</span></div>';
+var HTMLmobile = '<div class="contact-item"><a href="#"><div class="contact-icon-align-box"><i class="ion-ios-telephone-outline contact-icon"></i></div></a><div class="contact-value"><span>%data%</span></div>';
+var HTMLemail = '<div class="contact-item"><a href="#"><div class="contact-icon-align-box"><i class="ion-ios-email-outline contact-icon"></i></div></a><div class="contact-value"><span>%data%</span></div>';
+var HTMLtwitter = '<div class="contact-item"><a href="#"><div class="contact-icon-align-box"><i class="ion-social-twitter-outline contact-icon"></i></div></a><div class="contact-value"><span>%data%</span></div>';
+var HTMLgithub = '<div class="contact-item"><a href="#"><div class="contact-icon-align-box"><i class="ion-social-github-outline contact-icon"></i></div></a><div class="contact-value"><span>%data%</span></div>';
+var HTMLwebsite = '<div class="contact-item"><a href="#"><div class="contact-icon-align-box"><i class="ion-ios-flag-outline contact-icon"></i></div></a><div class="contact-value"><span>%data%</span></div>';
+
+//Short Description div
+var HTMLmessageDiv = '<div class="short-description"></div>';
+var HTMLwelcomeMsg = '<p class="welcome-message">%data%</p>';
+var HTMLskillsStart = '<h2 id="skills-h2">Skills at a Glance:</h3><ul id="skills" class="flex-box"></ul>';
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
+//Work Section
+var HTMLworkHeader = '<div class="section-header"><div class="section-icon"><i class="ion-ios-list-outline"></i></div><div class="section-header-title"><h2 class="title-text">Experience</h2></div><div class="pull-menu-icon"><i class="ion-chevron-down icon-box"></i></div></div>';
 var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a href="#">%data%';
+var HTMLworkEmployer = '<a href="#" class="sub-header">%data%';
 var HTMLworkTitle = ' - %data%</a>';
-var HTMLworkDates = '<div class="date-text">%data%</div>';
-var HTMLworkLocation = '<div class="location-text">%data%</div>';
-var HTMLworkDescription = '<p><br>%data%</p>';
+var HTMLworkDates = '<div class="date-text"><p>%data%</p></div>';
+var HTMLworkLocation = '<div class="location-text"><p>%data%</p></div>';
+var HTMLworkDescription = '<p class="description-text">%data%</p>';
 
+//Project Section
+var HTMLprojectHeader = '<div class="section-header"><div class="section-icon"><i class="ion-ios-albums-outline"></i></div><div class="section-header-title"><h2 class="title-text">Projects</h2></div><div class="pull-menu-icon"><i class="ion-chevron-down icon-box"></i></div></div>';
 var HTMLprojectStart = '<div class="project-entry"></div>';
-var HTMLprojectTitle = '<a href="#">%data%</a>';
-var HTMLprojectDates = '<div class="date-text">%data%</div>';
-var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectTitle = '<a href="#" class="sub-header">%data%</a>';
+var HTMLprojectDates = '<div class="date-text"><p>%data%</p></div>';
+var HTMLprojectDescription = '<p class="description-text">%data%</p>';
+var HTMLprojectImage = '<img src="%data%" class="project-screenshot">';
 
+//Education Section
+var HTMLeducationHeader = '<div class="section-header"><div class="section-icon"><i class="ion-ios-lightbulb-outline"></i></div><div class="section-header-title"><h2 class="title-text">Education</h2></div><div class="pull-menu-icon"><i class="ion-chevron-down icon-box"></i></div></div>';
 var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
-var HTMLschoolDates = '<div class="date-text">%data%</div>';
-var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
-
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
+var HTMLschoolName = '<a href="#" class="sub-header">%data%';
+var HTMLschoolDegree = ' - %data%</a>';
+var HTMLschoolLocation = '<div class="location-text"><p>%data%</p></div>';
+var HTMLschoolDates = '<div class="date-text"><p>%data%</p></div>';
+var HTMLschoolMajor = '<div class="major"><p class="description-text">Major: %data%</p></div>';
+var HTMLonlineClassesStart = '<div class="online-classes-entry"></div>';
+var HTMLonlineClasses = '<p class="sub-header">Online Classes</p>';
+var HTMLonlineClassesSubHeading = '<div class="online-classes-sub-heading"></div>';
 var HTMLonlineTitle = '<a href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
-var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a href="#">%data%</a>';
+var HTMLonlineDates = '<div class="date-text"><p>%data%</p></div>';
+var HTMLonlineURL = '<a href="#">%data%</a>';
+var HTMLonlineDescription = '<p class="description-text">%data%</p>';
 
-var internationalizeButton = '<button>Internationalize</button>';
-var googleMap = '<div id="map"></div>';
+//MAPS SECTION
+var HTMLmapsHeader = '<div class="section-header"><div class="section-icon"><i class="ion-ios-navigate-outline"></i></div><div class="section-header-title"><h2 class="title-text">My Places</h2></div><div class="pull-menu-icon"><i class="ion-chevron-down icon-box"></i></div></div>';
 
 
-/*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
-*/
-$(document).ready(function() {
-  $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);  
-  });
-});
+// var HTMLimgdiv = '<div class="img-div"></div>'
+// var HTMLbioPic = '<img src="%data%" class="biopic">';
 
-/*
-The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
-*/
+// // Div for name and Role:
+// var HTMLnameDiv = '<div class="name-div"></div>';
+// var HTMLheaderName = '<h1 id="name">%data%</h1>';
+// var HTMLheaderRole = '<h2 class="role">%data%</h2>';
+// var HTMLlocation = '<div class="location-info"><i class="ion-ios-location-outline location-icon"></i><span class="location-text">%data%</span></div>';
+
+// var HTMLheaderName = '<h1 id="name">%data%</h1>';
+// var HTMLheaderRole = '<span>%data%</span><hr>';
+
+// var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
+// var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
+// var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
+// var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
+// var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
+// var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
+// var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
+
+// var HTMLbioPic = '<img src="%data%" class="biopic">';
+// var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
+
+// var HTMLskillsStart = '<h3 id="skills-h3">Skills at a Glance</h3><ul id="skills" class="flex-box"></ul>';
+
+// var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
+
+// var HTMLworkStart = '<div class="work-entry"></div>';
+// var HTMLworkEmployer = '<a href="#">%data%';
+// var HTMLworkTitle = ' - %data%</a>';
+// var HTMLworkDates = '<div class="date-text">%data%</div>';
+// var HTMLworkLocation = '<div class="location-text">%data%</div>';
+// var HTMLworkDescription = '<p><br>%data%</p>';
+
+// var HTMLprojectStart = '<div class="project-entry"></div>';
+// var HTMLprojectTitle = '<a href="#">%data%</a>';
+// var HTMLprojectDates = '<div class="date-text">%data%</div>';
+// var HTMLprojectDescription = '<p><br>%data%</p>';
+// var HTMLprojectImage = '<img src="%data%">';
+
+// var HTMLschoolStart = '<div class="education-entry"></div>';
+// var HTMLschoolName = '<a href="#">%data%';
+// var HTMLschoolDegree = ' -- %data%</a>';
+// var HTMLschoolDates = '<div class="date-text">%data%</div>';
+// var HTMLschoolLocation = '<div class="location-text">%data%</div>';
+// var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+
+// var HTMLonlineClasses = '<h3>Online Classes</h3>';
+// var HTMLonlineTitle = '<a href="#">%data%';
+// var HTMLonlineSchool = ' - %data%</a>';
+// var HTMLonlineDates = '<div class="date-text">%data%</div>';
+// var HTMLonlineURL = '<br><a href="#">%data%</a>';
+
+
+
+
+/* - - - - - - - Log Click Locations - - - - - - - */
+
 clickLocations = [];
 
 function logClicks(x,y) {
@@ -86,22 +131,15 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
 });
 
 
+/* - - - - - - - Google Maps - - - - - - - */
+var googleMap = '<div id="map"></div>';
+// Define global variable:
+var map;
 
-/*
-This is the fun part. Here's where we generate the custom Google Map for the website.
-See the documentation below for more details.
-https://developers.google.com/maps/documentation/javascript/reference
-*/
-var map;    // declares a global map variable
-
-
-/*
-Start here! initializeMap() is called when page is loaded.
-*/
+// Initialise Map:
 function initializeMap() {
 
   var locations;
@@ -110,37 +148,27 @@ function initializeMap() {
     disableDefaultUI: true
   };
 
-  /* 
-  For the map to be displayed, the googleMap var must be
-  appended to #mapDiv in resumeBuilder.js. 
-  */
+  // Append to #mapDiv in resumeBuilder.js 
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
 
-  /*
-  locationFinder() returns an array of every location string from the JSONs
-  written for bio, education, and work.
-  */
+  // Return location string from bio.location information:
   function locationFinder() {
 
-    // initializes an empty array
+    // Initializes an empty array
     var locations = [];
 
-    // adds the single location property from bio to the locations array
+    // Adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
 
-    // iterates through school locations and appends each location to
-    // the locations array. Note that forEach is used for array iteration
-    // as described in the Udacity FEND Style Guide: 
-    // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
+    // Iterates through school locations and appends each location to
+    // the locations array.
     education.schools.forEach(function(school){
       locations.push(school.location);
     });
 
-    // iterates through work locations and appends each location to
-    // the locations array. Note that forEach is used for array iteration
-    // as described in the Udacity FEND Style Guide: 
-    // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
+    // Iterates through work locations and appends each location to
+    // the locations array.
     work.jobs.forEach(function(job){
       locations.push(job.location);
     });
@@ -148,11 +176,7 @@ function initializeMap() {
     return locations;
   }
 
-  /*
-  createMapMarker(placeData) reads Google Places search results to create map pins.
-  placeData is the object returned from search results containing information
-  about a single location.
-  */
+  //createMapMarker(placeData)
   function createMapMarker(placeData) {
 
     // The next lines save location data from the search result object to local variables
@@ -175,13 +199,13 @@ function initializeMap() {
       content: 'I have lived in ' + name
     });
 
-    // hmmmm, I wonder what this is about...
+    // Vanilla JS way to listen for resizing of the window and adjust map bounds:
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
       infoWindow.open(map, this);
     });
 
-    // this is where the pin actually gets added to the map.
+    // Where the pin actually gets added to the map.
     // bounds.extend() takes in a map location object
     bounds.extend(new google.maps.LatLng(lat, lon));
     // fit the map to the new marker
@@ -254,3 +278,4 @@ window.addEventListener('resize', function(e) {
   // Make sure the map bounds get updated on page resize
  map.fitBounds(mapBounds);
 });
+

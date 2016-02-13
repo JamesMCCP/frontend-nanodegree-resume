@@ -1,17 +1,3 @@
-// Hello.
-//
-// This is JSHint, a tool that helps to detect errors and potential
-// problems in your JavaScript code.
-//
-// To start, simply enter some JavaScript anywhere on this page. Your
-// report will appear on the right side.
-//
-// Additionally, you can toggle specific options in the Configure
-// menu.
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
-
 var bio = {
     'name': 'James McCarthy-Price',
     'role': 'Environmental Windsurfer',
@@ -20,9 +6,10 @@ var bio = {
         'mobile': '0420 786 589',
         'github': 'https://github.com/JamesMCCP',
         'twitter': 'https://twitter.com/JamesMCCP',
-        'location': 'Perth, Australia'
+        'location': 'Perth, Australia',
+        'website': 'www.jamesmcp.com'
     },
-    'welcomeMessage': 'Hello and welcome to my Udacity created profile! :)',
+    'welcomeMessage': 'James McCarthy-Price is a renewable wave energy engineer and professional windsurfer. Currently working at Bombora Wave Power, James is working towards his dream of being part of a team to bring commercially viable renewable wave energy to the world. <p><br> James also is preparing to attend a number of professional windsurfing tour events in 2017 from Morocco to Hawaii.',
     'skills': ['Renewable Wave Energy',
         'Windsurfing',
         'Programming',
@@ -30,8 +17,23 @@ var bio = {
         'Guitar'
     ],
     'location': 'Perth, Western Australia',
-    'biopic': 'images/portrait.jpg',
-    'display': function() {},
+    'biopic': 'images/portrait_square.png',
+    'display': function() {
+        $("#header").append(HTMLimgDiv);
+        $(".img-div").append(HTMLbioPic.replace("%data%", bio.biopic));
+        $("#header").append(HTMLnameDiv);
+        $(".name-div").append(HTMLheaderName.replace("%data%", bio.name));
+        $(".name-div").append(HTMLheaderRole.replace("%data%", bio.role));
+        $(".name-div").append(HTMLlocation.replace("%data%", bio.contacts.location));
+        $("#header").append(HTMLcontactDiv);
+        $(".contact-div").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+        $(".contact-div").append(HTMLemail.replace("%data%", bio.contacts.email));
+        $(".contact-div").append(HTMLtwitter.replace("%data%", bio.contacts.twitter));
+        $(".contact-div").append(HTMLgithub.replace("%data%", bio.contacts.github));
+        $(".contact-div").append(HTMLwebsite.replace("%data%", bio.contacts.website));
+        $("#header").append(HTMLmessageDiv);
+        $(".short-description").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
+    },
 };
 
 var education = {
@@ -63,7 +65,27 @@ var education = {
         'date': '2014-2015',
         'url': 'www.udacity.com',
     }],
-    'display': function() {},
+    'display': function() {
+        $("#education").append(HTMLeducationHeader);
+        for (e in education.schools) {
+            $("#education").append(HTMLschoolStart);
+            var sch = HTMLschoolName.replace("%data%", education.schools[e].name) + HTMLschoolDegree.replace("%data%", education.schools[e].degree);
+            $(".education-entry:last").append(sch);
+            $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[e].location));
+            $(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[e].dates));
+            $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[e].majors));
+        }
+        $("#education").append(HTMLonlineClassesStart);
+        $(".online-classes-entry:last").append(HTMLonlineClasses);
+        for (o in education.onlineCourses) {
+            $(".online-classes-entry:last").append(HTMLonlineClassesSubHeading);
+            $(".online-classes-sub-heading:last").append(HTMLonlineTitle.replace("%data%", education.onlineCourses[o].title));
+            $(".online-classes-sub-heading:last").append(HTMLonlineSchool.replace("%data%", education.onlineCourses[o].school));
+            $(".online-classes-sub-heading:last").append(HTMLonlineDates.replace("%data%", education.onlineCourses[o].dates));
+            $(".online-classes-sub-heading:last").append(HTMLonlineDescription.replace("%data%", education.onlineCourses[o].description));
+            $(".online-classes-sub-heading:last").append(HTMLonlineURL.replace("%data%", education.onlineCourses[o].url));
+        }
+    },
 };
 
 var work = {
@@ -86,7 +108,22 @@ var work = {
         'date': '2012 -2013',
         'description': 'Environmental Engineering Intern reponsible for managing installation of large scale evaporation ponds in Ramsar Convention listed Lake Warden Catchment.'
     }],
-    'display': function() {},
+    'display': function() {
+        $("#work-experience").append(HTMLworkHeader);
+        for (j in work.jobs) {
+            $("#work-experience").append(HTMLworkStart);
+            var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[j].employer);
+            var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[j].title);
+            var formattedEmployerTitle = formattedEmployer + formattedTitle;
+            $(".work-entry:last").append(formattedEmployerTitle);
+            var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[j].date);
+            $(".work-entry:last").append(formattedWorkDates);
+            var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[j].location);
+            $(".work-entry:last").append(formattedWorkLocation);
+            var formattedWorkDesc = HTMLworkDescription.replace("%data%", work.jobs[j].description);
+            $(".work-entry:last").append(formattedWorkDesc);
+        }
+    },
 };
 
 var projects = {
@@ -115,123 +152,18 @@ var projects = {
         'description': 'Volounteered for the Poland Indoor Event. Coordinated all athletes on live TV in a stadium of 35,000 people.',
         'images': ['images/poland.png']
     }],
-    'display': function() {},
-};
-
-// Add Biography Display Function:
-bio.display = function() {
-
-    // Add name and role:
-    var formattedName = HTMLheaderName.replace('%data%', bio.name);
-    var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-    $('#header').prepend(formattedName, formattedRole);
-    // Add bio message:
-    $('#header').append(HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage));
-    // Add Profile Pic:
-    $('#header').append(HTMLbioPic.replace('%data%', bio.biopic));
-
-    // Add email address:
-    var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
-    // Add Mobile Phone:
-    var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-    // Add GitHub:
-    var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
-    // Add Twitter:
-    var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
-    // Add location:
-    var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
-
-    // Create combined contact variable:
-    var allContactDetail = formattedEmail + formattedMobile + formattedGithub + formattedTwitter + formattedLocation;
-
-    // Append info to header contacts:
-    $('#topContacts').append(allContactDetail);
-
-    // Append info to footer contacts:
-    $('#footerContacts').append(allContactDetail);
-
-};
-
-// Add Education Display Function:
-education.display = function() {
-    for (var school in education.schools) {
-        $('#education').append(HTMLschoolStart);
-
-        var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
-        var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
-        var formatteddate = HTMLschoolDates.replace('%data%', education.schools[school].date);
-        var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
-        var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
-        $('.education-entry:last').append(formattedName + formattedDegree, formatteddate, formattedLocation, formattedMajor);
-    }
-};
-
-// Add Work Display Function:
-work.display = function() {
-
-    // Skills loop:
-    if (bio.skills.length > 0) {
-
-        // Add skills box:
-        $('#header').append(HTMLskillsStart);
-
-        //Create formatted skills variables:
-        var formattedSkill1 = HTMLskills.replace('%data%', bio.skills[0]);
-        var formattedSkill2 = HTMLskills.replace('%data%', bio.skills[1]);
-        var formattedSkill3 = HTMLskills.replace('%data%', bio.skills[2]);
-        var formattedSkill4 = HTMLskills.replace('%data%', bio.skills[3]);
-        var formattedSkill5 = HTMLskills.replace('%data%', bio.skills[4]);
-
-        // Combine skills to single var:
-        var allSkills = formattedSkill1 + formattedSkill2 + formattedSkill3 + formattedSkill4 + formattedSkill5;
-
-        // Append Skill to #skills:
-        $('#skills').append(allSkills);
-    }
-
-    // Employer loop:
-    for (var job in work.jobs) {
-        $('#workExperience').append(HTMLworkStart);
-
-        // Create employer variables:
-        var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[job].employer);
-        var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[job].title);
-        var formattedDate = HTMLworkDates.replace('%data%', work.jobs[job].date);
-        var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[job].description);
-
-        // Combine employer variables:
-        var formattedEmployerTitle = formattedEmployer + formattedTitle + formattedDate + formattedDescription;
-
-        // Append employer variables:
-        $('.work-entry:last').append(formattedEmployerTitle);
-    }
-};
-
-// Add Projects Display Function:
-projects.display = function() {
-    for (var project in projects.projects) {
-        $('#projects').append(HTMLprojectStart);
-
-        // Add title:
-        var formattedProjTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
-        $('.project-entry:last').append(formattedProjTitle);
-
-        // Add date:
-        var formattedProjdate = HTMLprojectDates.replace('%data%', projects.projects[project].date);
-        $('.project-entry:last').append(formattedProjdate);
-
-        // Add Description:
-        var formattedProjDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
-        $('.project-entry:last').append(formattedProjDescription);
-
-        // Add image if possible:
-        if (projects.projects[project].images.length > 0) {
-            for (var image in projects.projects[project].images) {
-                var formattedProjImages = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
-                $('.project-entry:last').append(formattedProjImages);
+    'display': function() {
+        $("#projects").append(HTMLprojectHeader);
+        for (p in projects.projects) {
+            $("#projects").append(HTMLprojectStart);
+            $(".project-entry:last").append(HTMLprojectTitle.replace("%data%", projects.projects[p].title));
+            $(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[p].date));
+            $(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[p].description));
+            for (i in projects.projects[p].images) {
+                $(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[p].images[i]));
             }
         }
-    }
+    },
 };
 
 // Call display functions:
@@ -241,6 +173,7 @@ projects.display();
 education.display();
 
 // Add Google Map:
+$("#mapDiv").append(HTMLmapsHeader);
 $('#mapDiv').append(googleMap);
 
 // Log clicks:
@@ -262,24 +195,4 @@ function locationizer(work_obj) {
     return locationArray;
 }
 
-// // Element Highlight tool:
-// $(document).ready(function() {
-
-//   $('#header').hover(
-//     //on mouseover
-//     function() {
-//       $(this).animate({
-//         height: '+=250' //adds 250px
-//         }, 'slow' //sets animation speed to slow
-//       );
-//     },
-//     //on mouseout
-//     function() {
-//       $(this).animate({
-//         height: '-=250px' //substracts 250px
-//         }, 'slow'
-//       );
-//     }
-//   );
-
-// });
+main();
