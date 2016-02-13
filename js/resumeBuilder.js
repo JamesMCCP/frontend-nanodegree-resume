@@ -194,5 +194,3 @@ function locationizer(work_obj) {
 
     return locationArray;
 }
-
-main();
